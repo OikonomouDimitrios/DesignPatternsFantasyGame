@@ -6,18 +6,27 @@ public class DesignPatternFantasyGame {
         Region westArea = new Region("West Area");
         Region eastArea = new Region("East Area");
 
-        Region cityOfWaterBane = new Region("City of Waterbane");
-        Region dungeonOfDespair = new Region("Dungeon Of Despair");
-        worldMap.addSubArea(westArea);
-        worldMap.addSubArea(eastArea);
+        Mist eastAreaOnMist = new Mist(new UknownArea(eastArea));
 
-        westArea.addSubArea(cityOfWaterBane);
+        Region cityOfWaterBane = new Region("City of Waterbane");
         cityOfWaterBane.addSubArea(new Place("TownHall"));
         cityOfWaterBane.addSubArea(new Place("Tavern"));
-        westArea.addSubArea(dungeonOfDespair);
+
+        Mist cityOfWaterBaneOnMist = new Mist(cityOfWaterBane);
+
+        Region dungeonOfDespair = new Region("Dungeon Of Despair");
         dungeonOfDespair.addSubArea(new Place("Entrance Hall"));
 
+        UknownArea dungeonOfDespairUnknown = new UknownArea(dungeonOfDespair);
+
+
+        westArea.addSubArea(cityOfWaterBaneOnMist);
+        westArea.addSubArea(dungeonOfDespairUnknown);
+
         eastArea.addSubArea(new Place("Pit of Wyrms"));
+
+        worldMap.addSubArea(westArea);
+        worldMap.addSubArea(eastAreaOnMist);
         worldMap.displayMap();
     }
 }
